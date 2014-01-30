@@ -38,41 +38,26 @@
 
 </head>
 <body id='body-index'>
+  <script type='text/x-handlebars' data-template-name='application'>
   <div id='sticky-footer-wrap'>
 
     <div class="navbar navbar-inverse navbar-static-top">
       <div class="navbar-inner black-gradient">
         <div class="container-fluid">
           <a class='brand'>The<span class='rad'>Fridge</span></a>
+            <div class='nav-collapse collapse'>
+              <p class='navbar-text pull-right'>
+                {{#link-to 'login' class="btn btn-mini btn-inverse navbar-link logout"}} <i class="radmin-icon radmin-redo"></i>Logout{{/link-to}}
+              </p>
+            </div>
         </div>
       </div>
     </div>
 
-    <div class='container-fluid main-container'>
-      <div class='row-fluid'>
-        <div class='span12'>
-          <div class='sidebar-nav'>
-            <ul class='nav nav-stacked left-menu'>
-              <li id='navigation-index'>
-                <a>
-                  <span class='box'>
-                    <i class="radmin-icon radmin-home"></i>
-                  </span>
-                  <span class="hidden-tablet hidden-phone">The Kitchen</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class='container-fluid content-wrapper'>
-          </div>
-        </div>
-        <div class='row-fluid'>
-          <div class='span12'>&nbsp;</div>
-        </div>
-      </div>
-    </div>
+    {{outlet}}
 
   </div>
+  </script>
 
 <!-- Javascript -->
 
@@ -208,7 +193,101 @@
 	jQuery(function($){
 		flot_sin_cos('flot-line-graph', flot_options_sin_cos);
 	});
-	</script>
+</script>
+<script src="js/application.js"></script>
+<script src="js/router.js"></script>
+<script src='js/models/recipe.js'></script>
+<script type="text/x-handlebars" data-template-name='login'>
+	<div class="container-fluid">
+    <div class="row-fluid">
+      <span class='span12'>&nbsp;</span>
+    </div>
+		<div class="row-fluid">
+			<div class="span4"></div>
 
+			<div class="span4 login-span">
+				<div class="login-radmin align-center">
+					<h1 class="brand">
+						The <span class="rad">Fridge</span>
+					</h1>
+				</div>
+				<div class="login-wrapper">
+					<div class="login-inner">
+						<h2 class="sign-in">Sign in</h2>
+						<small class="muted">Please sign in using your registered account details</small>
+						<div class="squiggly-border"></div>
+
+						<div class="login-inner">
+							<form class="form-horizontal">
+								<div class="input-prepend">
+									<span class="add-on"> <i class="radmin-icon radmin-user"></i>
+									</span>
+									<input class="input-large" id="input-username" size="16" type="text" placeholder="Username"></div>
+								<br />
+								<br />
+								<div class="input-prepend">
+									<span class="add-on"> <i class="radmin-icon radmin-locked"></i>
+									</span>
+									<input class="input-large" id="input-password" size="16" type="password" placeholder="Password"></div>
+
+								<div class="form-actions">
+									<a class="btn-link pull-left" href="login.html#" id="lost-password">Lost your password?</a>
+                  {{#link-to 'kitchen' class="btn btn-large btn-inverse pull-right" id="login"}}Login{{/link-to}}
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="span4"></div>
+		</div>
+
+	</div>
+</script>
+<script type='text/x-handlebars' data-template-name='kitchen'>
+    <div class='container-fluid main-container'>
+      <div class='row-fluid'>
+        <div class='span12'>
+          <div class='sidebar-nav'>
+            <ul class='nav nav-stacked left-menu'>
+              <li id='navigation-index'>
+                {{#link-to 'recipes'}}
+                  <span class='box'>
+                    <i class="radmin-icon radmin-home"></i>
+                  </span>
+                  <span class="hidden-tablet hidden-phone">The Kitchen</span>
+                {{/link-to}}
+              </li>
+              <li id='navigation-index'>
+                {{#link-to 'kitchen.inventory'}}
+                  <span class='box'>
+                    <i class="radmin-icon" data-icon="<"></i>
+                  </span>
+                  <span class="hidden-tablet hidden-phone">Inventory</span>
+                {{/link-to}}
+              </li>
+            </ul>
+          </div>
+          <div class='container-fluid content-wrapper'>
+            {{outlet}}
+          </div>
+        </div>
+        <div class='row-fluid'>
+          <div class='span12'>&nbsp;</div>
+        </div>
+      </div>
+    </div>
+</script>
+<script type="text/x-handlebars" data-template-name='recipes'>
+  <h1>Recipes</h1>
+  {{#each}}
+    <h3>{{name}}</h3>
+  {{/each}}
+</script>
+<script type="text/x-handlebars" data-template-name='kitchen/inventory'>
+  <h1>Inventory</h1>
+</script>
 </body>
 </html>

@@ -1,1 +1,3 @@
-window.TheFridge = Ember.application.create();
+window.TheFridge = Ember.Application.create();
+
+TheFridge.ApplicationAdapter = DS.FixtureAdapter.extend();
